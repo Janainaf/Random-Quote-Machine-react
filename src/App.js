@@ -3,14 +3,24 @@ import "./App.css";
 import quotes from "./quotes.js";
 
 export class App extends React.Component {
+  state = {
+    quotes: quotes,
+    quote: "Here we are",
+  };
+
   getRandomQuote() {
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    console.log(quote);
+    let quote = quotes[Math.floor(Math.random() * quotes.length)];
+    return quote.quote;
   }
 
-  // state = {
-  //   quote: quotes.quote,
-  // };
+  handleQuote = () => {
+    let chosen = this.getRandomQuote();
+    console.log(chosen);
+    this.setState({
+      quote: chosen,
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -22,10 +32,10 @@ export class App extends React.Component {
           <div id="quote-box">
             <div className="quote-text">
               <i className="fa fa-quote-left"> </i>
-              <span id="text"> hi </span>
+              <span id="text">{this.state.quote} </span>
             </div>
             <div className="quote-author">
-              - <span id="author"> By mememe</span>
+              - <span id="author"> By author</span>
             </div>
             <div className="buttons">
               <a
@@ -47,7 +57,7 @@ export class App extends React.Component {
               <button
                 className="button"
                 id="new-quote"
-                onClick={this.getRandomQuote}
+                onClick={this.handleQuote}
               >
                 New quote
               </button>
