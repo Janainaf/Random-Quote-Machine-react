@@ -6,18 +6,19 @@ export class App extends React.Component {
   state = {
     quotes: quotes,
     quote: "Here we are",
+    author: "me",
   };
 
   getRandomQuote() {
     let quote = quotes[Math.floor(Math.random() * quotes.length)];
-    return quote.quote;
+    return quote;
   }
 
   handleQuote = () => {
     let chosen = this.getRandomQuote();
-    console.log(chosen);
     this.setState({
-      quote: chosen,
+      quote: chosen.quote,
+      author: chosen.source,
     });
   };
 
@@ -35,7 +36,7 @@ export class App extends React.Component {
               <span id="text">{this.state.quote} </span>
             </div>
             <div className="quote-author">
-              - <span id="author"> By author</span>
+              - <span id="author"> {this.state.author}</span>
             </div>
             <div className="buttons">
               <a
